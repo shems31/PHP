@@ -1,19 +1,21 @@
 <?php
 // includes/db.php
-$host = 'localhost';
-$db   = 'nom_de_votre_base';
-$user = 'utilisateur';
-$pass = 'mot_de_passe';
-$charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$host = 'localhost';     // Hôte du serveur MySQL
+$db   = 'mon_projet';    // Nom de votre base de données (selon votre script SQL)
+$user = 'root';          // Nom d'utilisateur MySQL (par défaut 'root' sous XAMPP)
+$pass = '';              // Mot de passe MySQL (vide par défaut sous XAMPP)
+$charset = 'utf8mb4';    // Jeu de caractères
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset"; // Data Source Name
 $options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Active les exceptions PDO
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Mode de fetch par défaut
 ];
 
 try {
-     $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    $pdo = new PDO($dsn, $user, $pass, $options); // Crée une instance PDO
+} catch (PDOException $e) {
+    echo 'Connexion échouée : ' . $e->getMessage(); // Affiche l'erreur
+    exit();
 }

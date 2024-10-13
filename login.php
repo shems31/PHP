@@ -3,18 +3,18 @@
 include 'includes/header.php';
 include 'includes/navbar.php';
 include 'includes/db.php';
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Traitement du formulaire de connexion
     $email = $_POST['email'];
     $password = $_POST['password'];
-
+    echo $email;
+    echo $password;
     // Vérification dans la base de données
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
-
+    echo $user['password'];
     if ($user && password_verify($password, $user['password'])) {
         // Connexion réussie
         $_SESSION['user_id'] = $user['id'];

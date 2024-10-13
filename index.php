@@ -5,7 +5,7 @@ include 'includes/navbar.php';
 ?>
 
 <div class="container">
-    <h1>Bienvenue sur mon CV/Portfolio</h1>
+    <h1>Bienvenue sur mon CV/Portfo88lio</h1>
     <p>Ceci est la page d'accueil statique.</p>
 </div>
 
