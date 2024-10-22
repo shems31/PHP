@@ -1,44 +1,45 @@
 <?php
-// cv.php
-include 'includes/header.php';
-include 'includes/navbar.php';
-include 'includes/db.php';
-
-
-$user_id = $_SESSION['user_id'] ?? null;
-
-if ($user_id) {
-    // Récupérer les informations du CV depuis la base de données
-    $stmt = $pdo->prepare("SELECT * FROM cv WHERE user_id = ?");
-    $stmt->execute([$user_id]);
-    $cv = $stmt->fetch();
-
-    // Traitement du formulaire de mise à jour du CV
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        // Mise à jour dans la base de données
-        $stmt = $pdo->prepare("UPDATE cv SET title = ?, description = ? WHERE user_id = ?");
-        $stmt->execute([$title, $description, $user_id]);
-        echo "<script>alert('CV mis à jour avec succès.');</script>";
-    }
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
 }
+include 'db_connection.php';
+
+
+$user_id = $_SESSION['user_id'];
+
+$sql = "SELECT * FROM users WHERE id = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$user_id]);
+$user = $stmt->fetch();
 ?>
 
-<div class="container">
-    <h2>Mon CV</h2>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+    <link rel="stylesheet" href="./css/cv.css">
+</head>
+<body>
+    <h1>Mon CV</h1>
+    <p>Voici la page de mon CV.</p>
 
-    <?php if ($user_id): ?>
-        <form method="POST" action="cv.php">
-            <input type="text" name="title" value="<?= htmlspecialchars($cv['title']) ?>" required>
-            <textarea name="description" required><?= htmlspecialchars($cv['description']) ?></textarea>
-            <button type="submit">Mettre à jour</button>
-        </form>
-    <?php else: ?>
-        <p>Veuillez vous connecter pour voir et modifier votre CV.</p>
-    <?php endif; ?>
-</div>
+    <form action="save_cv.php" method="POST" enctype="multipart/form-data">
+        <label for="cv_file">Télécharger votre CV (PDF) :</label>
+        <input type="file" name="cv_file" accept="application/pdf" required><br>
 
-<?php
-include 'includes/footer.php';
-?>
+        <input type="submit" value="Publier/Mettre à jour CV">
+    </form>
+
+    <?php
+    if (!empty($user['cv_file'])) {
+        echo '<a href="uploads/' . htmlspecialchars($user['cv_file']) . '" target="_blank">Voir le CV PDF</a>';
+    } else {
+        echo 'Aucun CV PDF disponible.';
+    }
+    ?>
+</body>
+</html>

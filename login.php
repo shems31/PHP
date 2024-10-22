@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <div class="container">
+<link rel="stylesheet" href="css/login.css"> 
+
     <h2>Connexion</h2>
     <?php if (isset($error)): ?>
         <p><?= htmlspecialchars($error) ?></p>

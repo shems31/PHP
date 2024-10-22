@@ -1,0 +1,31 @@
+/* contact.css */
+body {
+    background-color: #181818;
+    color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #f0f0f0;
+}
+
+p {
+    text-align: center;
+    color: #cccccc;
+}
+
+a {
+    display: inline-block;
+    background-color: #FF9800;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #fb8c00;
+}
