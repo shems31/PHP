@@ -18,8 +18,6 @@ Ce projet a été développé dans le cadre du cours de PHP. Il s'agit d'un site
 - **Page CV modifiable** : Espace dédié à la consultation et à la modification du CV pour l'utilisateur connecté.
 ## Structure du projet
 
-- `/pages` : Dossier regroupant les différentes pages du site (contact, profil, projets, etc.).
-- `/php` : Fichiers PHP principaux pour la gestion des utilisateurs, de l'authentification et des formulaires.
 - `/includes` : Contient les éléments communs tels que l'en-tête, le pied de page, et la barre de navigation.
 - `/css` : Fichiers CSS pour la mise en page et le design des différentes pages.
 
@@ -32,4 +30,4 @@ Ce projet a été développé dans le cadre du cours de PHP. Il s'agit d'un site
 
 1. Clonez ce dépôt via GitHub :
    ```bash
-   git clone https://github.com/shems31/PHP.git
+   git clone https://github.com/shems31/PHP.gitgi
